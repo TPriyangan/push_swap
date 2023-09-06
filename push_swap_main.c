@@ -20,7 +20,7 @@ void  circular_doubly_linked_list(int *a)
   struct node  *new_node;
   int  i;
   int  length;
-  int  *current;
+  struct node	*current;
   
   head = (struct node *)malloc(sizeof(struct node));
   tail = (struct node *)malloc(sizeof(struct node));
@@ -28,22 +28,33 @@ void  circular_doubly_linked_list(int *a)
   if (!head || !tail)
     return (NULL);
   head -> data = a[0];
-  head -> prev = &a[ft_strlen(a) - 1];
-  head -> next = &a[1]
+  head -> prev = NULL;
+  head -> next = NULL;
   tail -> data = a[ft_strlen(a) - 1];
-  tail -> next = &a[0];
-  tail -> prev = &a[strlen(a) - 2];
-
+  tail -> next = head;
+  tail -> prev = NULL;
   i = 1;
   length = strlen(a) -1;
   current = head;
-  while (i != length)
+  while (i < length)
   {
     if (i != length - 1)
     {
       new_node = (struct node *)malloc(sizeof(struct node));
-      if (!new_node)
-        returnn (NULL);
+if (!new_node)
+{
+struct node *temp;
+temp = tail->next;//new function for free to make
+  while (temp != head)
+  {
+    struct node *prev_node = temp->next;
+    free(temp);
+    temp = prev_node;
+  }
+  free(head);
+  free(tail);
+  return (NULL);
+}
       new_node->data = a[i];
       new_node->prev = current;
       new_node->next = head;
