@@ -15,7 +15,7 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-void  circular_doubly_linked_list(int *a)
+struct node  *circular_doubly_linked_list(int *a)
 {
   struct node  *new_node;
   int  i;
@@ -64,4 +64,20 @@ temp = tail->next;//new function for free to make
     }
     i++;
   }
+	return(head);
 }
+
+void	push_swap(int *a)
+{
+	struct node  *mylist;
+
+	mylist = circular_doubly_linked_list(a);
+}
+
+
+
+
+
+
+
+
