@@ -119,4 +119,42 @@ void  push_b(struct node **stack_a, struct node **stack_b)
   }
 }
 
+void  rotate_a(struct node **stack_a)
+{
+  if (!*stack_a)
+    return ;
+  *stack_a = (*stack_a)->next;
+}
 
+void  rotate_b(struct node **stack_b)
+{
+  if (!*stack_b)
+    return ;
+  *stack_b = (*stack_b)->next;
+}
+
+void  rotate(struct node **stack_a, struct node **stack_b)
+{
+  rotate_a(*stack_a);
+  rotate_b(*stack_b);
+}
+
+void  reverse_rotate_a(struct node **stack_a)
+{
+  if (!*stack_a)
+    return ;
+  *stack_a = (*stack_a)->prev;
+}
+
+void  reverse_rotate_b(struct node **stack_b)
+{
+  if (!*stack_b)
+    return ;
+  *stack_b = (*stack_b)->prev;
+}
+
+void  reverse_rotate(struct node **stack_a, struct node **stack_b)
+{
+  reverse_rotate_a(*stack_a);
+  reverse_rotate_b(*stack_b);
+}
