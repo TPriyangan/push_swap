@@ -56,6 +56,7 @@ void  push_a(struct node **stack_a, struct node **stack_b)
     temp->prev = (*stack_a)->prev;
     (*stack_a)->prev->next = temp;
     (*stack_a)->prev = temp;
+    *stack_a = temp;
   }
   else
   {
@@ -70,8 +71,52 @@ void  push_a(struct node **stack_a, struct node **stack_b)
   }
   else
   {
-    (*stack_b)->next->prev = (*stack_b)->prev->next;
-    (*stack_b)->prev->next = (*stack_b)->next->prev;
-    (*stack_b) = (*stack_b)->next;
+    (*stack_b)->prev->next = (*stack_b)->next;
+    (*stack_b)->next->prev = (*stack_b)->prev;
+    struct node *temp_head = *stack_b;
+    *stack_b = (*stack_b)->next;
+    free(temp_head);
   }
 }
+
+void  push_b(struct node **stack_a, struct node **stack_b)
+{
+  struct node *temp;
+
+  if (!stack_a)
+    return ;
+  temp = (struct node*)malloc(sizeof(struct node*));
+  if (!temp)
+    return ;
+  temp->data = (*stack_a)->data;
+  if ((*stack_b))
+  {
+    temp->prev = (*stack_b)->prev;
+    temp->next = (*stack_b);
+    (*stack_b)->prev->next = temp;
+    (*stack_b)->prev = temp;
+    temp = (*stack_b);
+  }
+  else
+  {
+    temp->next = temp;
+    temp->prev = temp;
+    *stack_b = temp;
+  }
+
+  if ((*stack_a)->next == *stack_a && (*stack_a)->prev == *stack_a)
+  {
+    free(*stack_a);
+    *stack_a = NULL;
+  }
+  else
+  {
+    (*stack_a)->prev->next = (*stack_a)->next;
+    (*stack_a)->next->prev = (*stack_a)->prev;
+    struct node *temp_head = *stack_a;
+    *stack_a = (*stack_a)->next;
+    free(temp_head);
+  }
+}
+
+
