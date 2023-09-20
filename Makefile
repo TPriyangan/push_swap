@@ -3,28 +3,26 @@ NAME	= push_swap
 SRCS	= push_swap.c push_methods.c
 OBJS	= ${SRCS:.c=.o}
 
-MAIN	= push_swap.c
-
 HEADER	= push_swap.h
 
 CC	= gcc
 CFLAGS	= -Wall -Wextra -Werror -g
 
-.c.o:	%.o : %.c
-	@gcc ${CFLAGS} ${HEADER} -c $< -o $(<:.c=.o)
+.c.o:
+	@$(CC) ${CFLAGS} -c $< -o $@
 
 all: 		${NAME}
 
 ${NAME}:	${OBJS}
-	@make re -C ./libft
-	@$(CC) ${OBJS} -Llibft -lft -o ${NAME}
+	@make re -C ./pushswap
+	@$(CC) ${OBJS} -Lpushswap -lft -o ${NAME}
 
 clean:
-	@make clean -C ./libft
+	@make clean -C ./pushswap
 	@rm -f ${OBJS}
 
 fclean: 	clean
-	@make fclean -C ./libft
+	@make fclean -C ./pushswap
 	@rm -f $(NAME)
 
 re:			fclean all
