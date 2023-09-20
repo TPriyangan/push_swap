@@ -1,3 +1,5 @@
+#include "push_swap.h"
+
 void swap_a(struct node **stack_a)
 {
   struct node *temp;
