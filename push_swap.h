@@ -2,6 +2,15 @@
 # define PUSH_SWAP_H
 
 # include <unistd.h>
+# include <stdlib.h>
+# include <stddef.h>
+
+struct node
+{
+  int  data;
+  struct node *prev;
+  struct node *next;
+};
 
 /*moves*/
 void swap_a(struct node **stack_a);
